@@ -1,0 +1,34 @@
+<!-- Navigation pill with embedded theme toggle; nav items provided via slot -->
+
+<div class="nav-pill-wrap" data-capsule="header" data-theme-key="{{theme-key}}">
+  <nav class="nav-pill" aria-label="Primary">
+    <button
+      class="nav-pill__toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="nav-pill-menu"
+      aria-label="Toggle menu"
+    >
+      <i class="ri-menu-line" aria-hidden="true"></i>
+      <span class="nav-pill__sr">Menu</span>
+    </button>
+    <ul class="nav-pill__list" id="nav-pill-menu">
+      {{slot}}
+    </ul>
+  </nav>
+
+  <div class="nav-pill__theme">
+    <div class="theme-toggle" data-compact="true">
+      <button
+        class="theme-toggle__button"
+        type="button"
+        data-theme-button="true"
+        aria-label="Theme: auto"
+      >
+        <i class="theme-toggle__icon ri-contrast-2-line" aria-hidden="true"></i>
+        <span class="theme-toggle__text">Auto</span>
+      </button>
+    </div>
+    <span class="nav-pill__sr" role="status" data-theme-status></span>
+  </div>
+</div>

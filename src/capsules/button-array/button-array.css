@@ -1,0 +1,86 @@
+/* Connected-pill button row with Material-style radius choreography */
+
+.button-group {
+  display: flex;
+  gap: 0.08rem;
+  width: min(100%, 52rem);
+  margin-inline: auto;
+}
+
+.button-group__item {
+  --group-pill-radius: 1.375rem;
+  --group-radius-edge: 0.84rem;
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 2.75rem;
+  justify-content: center;
+  text-align: center;
+  border-radius: var(--group-pill-radius);
+  transition:
+    flex-grow var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.button-group__item--first {
+  border-radius: var(--group-pill-radius) var(--group-radius-edge)
+    var(--group-radius-edge) var(--group-pill-radius);
+}
+
+.button-group__item--middle {
+  border-radius: var(--group-radius-edge);
+}
+
+.button-group__item--last {
+  border-radius: var(--group-radius-edge) var(--group-pill-radius)
+    var(--group-pill-radius) var(--group-radius-edge);
+}
+
+.button-group:hover .button-group__item:not(:hover) {
+  flex-grow: 0.88;
+}
+
+.button-group__item:hover {
+  flex-grow: 1.12;
+}
+
+.button-group__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  line-height: 1;
+
+  & i {
+    font-size: 1rem;
+  }
+}
+
+.button-group__favicon {
+  width: 0.98rem;
+  height: 0.98rem;
+  display: inline-block;
+  flex: 0 0 auto;
+  object-fit: contain;
+}
+
+@media (width <= 640px) {
+  .button-group {
+    flex-direction: column;
+    width: min(20rem, 100%);
+    align-self: center;
+  }
+
+  .button-group__item--first {
+    border-radius: var(--group-pill-radius) var(--group-pill-radius)
+      var(--group-radius-edge) var(--group-radius-edge);
+  }
+
+  .button-group__item--middle {
+    border-radius: var(--group-radius-edge);
+  }
+
+  .button-group__item--last {
+    border-radius: var(--group-radius-edge) var(--group-radius-edge)
+      var(--group-pill-radius) var(--group-pill-radius);
+  }
+}

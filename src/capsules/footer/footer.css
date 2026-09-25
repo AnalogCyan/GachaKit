@@ -1,0 +1,24 @@
+/* Minimal footer styles */
+
+footer[data-capsule="footer"] {
+  padding-top: 0;
+  padding-bottom: var(--spacing-md);
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+  text-align: center;
+  /* Muting lives in the colour token. A blanket opacity dilutes the text
+     against whatever the gradient is doing behind it. */
+  color: var(--text-muted);
+  text-shadow: var(--text-halo);
+}
+
+@media print {
+  footer[data-capsule="footer"] {
+    text-shadow: none;
+  }
+}

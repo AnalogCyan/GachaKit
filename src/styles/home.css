@@ -1,0 +1,53 @@
+/* Showcase layout for the demo landing page */
+
+.nav-center {
+  display: flex;
+  justify-content: center;
+}
+
+.showcase-hero {
+  text-align: center;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+.showcase-title {
+  font-weight: 800;
+  font-size: clamp(2.4rem, 6lvw, 3.6rem);
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 0;
+}
+
+.showcase-lead {
+  font-size: 1.1rem;
+  max-width: 52ch;
+  margin-bottom: 0;
+}
+
+.showcase-hero .button-group {
+  margin-top: var(--spacing-md);
+}
+
+/* Grow from the label width so the longer one never wraps and the hover
+   choreography still has a base to grow from */
+.showcase-hero .button-group__item {
+  flex: 1 1 auto;
+  white-space: nowrap;
+}
+
+@media print {
+  .showcase-title {
+    background: none;
+    color: inherit;
+  }
+}
+
+@media (forced-colors: active) {
+  .showcase-title {
+    background: none;
+    color: CanvasText;
+  }
+}

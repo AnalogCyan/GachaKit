@@ -1,0 +1,28 @@
+{
+  "fonts": {
+    "primary": {
+      "name": "Nunito",
+      "url": "https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+    }
+  },
+  "externalResources": {
+    "remixIcons": {
+      "url": "https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css",
+      "type": "stylesheet"
+    }
+  },
+  "indieweb": {
+    "relMe": [],
+    "webmention": "",
+    "pingback": "",
+    "feed": "",
+    "feeds": []
+  },
+  "meta": {
+    "title": "GachaKit",
+    "description": "A modular static site generator that dispenses UI Capsules into your layout like little drops of joy.",
+    "author": "Cyan",
+    "image": "./media/og-image.png",
+    "siteUrl": ""
+  }
+}

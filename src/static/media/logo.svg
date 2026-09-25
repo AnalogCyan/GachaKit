@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="GachaKit">
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#141c38"/><stop offset="1" stop-color="#2d1a42"/>
+    </linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="0.75" y2="1">
+      <stop offset="0" stop-color="#8fd0ff" stop-opacity="0.16"/>
+      <stop offset="0.6" stop-color="#8fd0ff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="0" y1="0.2" x2="1" y2="0.9">
+      <stop offset="0" stop-color="#46b3ff"/>
+      <stop offset="1" stop-color="#ff7cc8"/>
+    </linearGradient>
+    <radialGradient id="form" cx="0.34" cy="0.2" r="0.92">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.3"/>
+      <stop offset="0.42" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="0.78" stop-color="#0b1020" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#0b1020" stop-opacity="0.5"/>
+    </radialGradient>
+    <linearGradient id="glass" x1="0.25" y1="0" x2="0.75" y2="1">
+      <stop offset="0" stop-color="#eaf6ff" stop-opacity="0.52"/>
+      <stop offset="0.5" stop-color="#9fd4ff" stop-opacity="0.2"/>
+      <stop offset="1" stop-color="#6ea8e8" stop-opacity="0.3"/>
+    </linearGradient>
+    <radialGradient id="shadow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#000000" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="ball"><circle cx="32" cy="32" r="20"/></clipPath>
+  </defs>
+
+  <rect width="64" height="64" rx="16" fill="url(#tile)"/>
+  <rect width="64" height="64" rx="16" fill="url(#sheen)"/>
+  <ellipse cx="34" cy="53.5" rx="17" ry="5.5" fill="url(#shadow)"/>
+
+  <g transform="rotate(18 32 32)">
+    <g clip-path="url(#ball)">
+      <circle cx="32" cy="32" r="20" fill="url(#brand)"/>
+      <circle cx="32" cy="32" r="20" fill="url(#form)"/>
+      <!-- dome shows the tile through it, not the coloured base -->
+      <path d="M12 30.8 A20 20 0 0 1 52 30.8 A20 6.4 0 0 1 12 30.8 Z" fill="#1b2340"/>
+
+      <ellipse cx="38" cy="48" rx="11" ry="5" fill="#ffffff" opacity="0.15" transform="rotate(-18 38 48)"/>
+
+      <!-- clear dome, bounded by the rim ellipse rather than a straight chord -->
+      <path d="M12 30.8 A20 20 0 0 1 52 30.8 A20 6.4 0 0 1 12 30.8 Z" fill="url(#glass)"/>
+      <path d="M12 30.8 A20 6.4 0 0 1 52 30.8" fill="none" stroke="#ffffff" stroke-opacity="0.22" stroke-width="1"/>
+
+      <ellipse cx="24" cy="18.5" rx="8" ry="4.4" fill="#ffffff" opacity="0.72" transform="rotate(-24 24 18.5)"/>
+      <ellipse cx="42" cy="23" rx="2.2" ry="4.6" fill="#ffffff" opacity="0.3" transform="rotate(20 42 23)"/>
+
+      <!-- lip where the halves meet -->
+      <path d="M12 30.8 A20 6.4 0 0 0 52 30.8" fill="none" stroke="#0b1020" stroke-opacity="0.26" stroke-width="2.6"/>
+      <path d="M12 30.2 A20 6.4 0 0 0 52 30.2" fill="none" stroke="#ffffff" stroke-opacity="0.9" stroke-width="1.2"/>
+    </g>
+    <circle cx="32" cy="32" r="20" fill="none" stroke="#ffffff" stroke-opacity="0.32" stroke-width="1"/>
+  </g>
+</svg>

@@ -1,0 +1,11 @@
+<!-- Page header wrapping the header capsule; nav items provided via slot -->
+
+<header
+  class="container page-shell"
+  data-capsule="page-header"
+  data-nav-page="{{nav-page}}"
+>
+  <div class="nav-row">
+    <drop capsule="header">{{slot}}</drop>
+  </div>
+</header>

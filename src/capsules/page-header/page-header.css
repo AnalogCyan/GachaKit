@@ -1,0 +1,12 @@
+/* Page header layout wrapping the nav */
+
+.nav-row {
+  display: flex;
+  justify-content: center;
+}
+
+@media (width <= 720px) {
+  .nav-row {
+    justify-content: space-between;
+  }
+}

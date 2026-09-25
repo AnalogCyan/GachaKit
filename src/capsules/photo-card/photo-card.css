@@ -1,0 +1,581 @@
+/* Polaroid photo cards, modal, and fullscreen view */
+
+/* Masonry-style layout using CSS columns */
+/* Column width, not viewport width: the container a capsule lands in is not
+   the window, and the header sizes it from the nav. Three is the maximum. */
+.polaroid-grid {
+  columns: 10rem 3;
+  column-gap: var(--spacing-xl);
+  margin-top: var(--spacing-xl);
+}
+
+/* Polaroid Card Styles */
+.polaroid {
+  background: var(--bg-main);
+  backdrop-filter: var(--bg-blur) var(--bg-saturation);
+  -webkit-backdrop-filter: var(--bg-blur) var(--bg-saturation);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  transition: transform var(--transition-normal);
+  cursor: pointer;
+  /* Prevent breaking between columns */
+  break-inside: avoid;
+  /* Default hover rotation variable */
+  --hover-rotation: 0deg;
+}
+.polaroid:hover {
+  transform: scale(1.02) rotate(var(--hover-rotation));
+}
+.photo-container {
+  display: block;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.photo-container img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+}
+.caption {
+  display: block;
+  margin-top: var(--spacing-lg);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+.caption-title {
+  display: block;
+  font-size: var(--font-size);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+.caption-date {
+  display: block;
+  margin-top: var(--spacing-xs);
+  font-size: calc(var(--font-size) * 0.75);
+  color: var(--text-muted);
+}
+
+/* Dark Mode Card Styles */
+.dark-theme .polaroid {
+  border: 1px solid var(--glass-border);
+}
+
+.dark-theme .polaroid:hover {
+  box-shadow: var(--shadow-xl);
+}
+
+/* Modal Styles */
+.photo-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--transition-normal),
+    visibility var(--transition-normal);
+  cursor: pointer; /* Indicate clickable overlay */
+  /* Ensure modal is positioned relative to viewport, not any parent container */
+  margin: 0;
+  padding: 0;
+  /* Fix for any potential parent clipping */
+  overflow: auto;
+  /* Detach from document flow to prevent parent influence */
+  transform: translateZ(0);
+}
+
+.photo-modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-container {
+  cursor: default; /* Reset cursor for modal content */
+  background: var(--bg-main);
+  backdrop-filter: var(--bg-blur) var(--bg-saturation);
+  -webkit-backdrop-filter: var(--bg-blur) var(--bg-saturation);
+  width: 75%;
+  max-width: 900px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  padding: var(--spacing-3xl);
+  opacity: 0;
+  position: relative;
+  overflow: visible;
+  transition: opacity var(--transition-normal);
+  border: 1px solid var(--glass-border);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  /* Ensure container is sized and positioned correctly */
+  box-sizing: border-box;
+  /* Prevent horizontal overflow */
+  max-height: 90vh;
+  overflow-y: auto;
+  /* Ensure it's above other elements */
+  z-index: 1002;
+  overflow-wrap: anywhere;
+}
+
+/* Ensure body doesn't scroll when modal is open */
+body.modal-open {
+  overflow: hidden;
+}
+
+.photo-modal-overlay.active .modal-container {
+  opacity: 1;
+}
+
+/* The photo in flight between a card and the modal. Above the modal so the
+   crossfade lands on it; only the box moves, the image cover-fills it so the
+   morph never distorts. Durations are mirrored by FLIGHT_MS and FADE_MS in
+   photo-card.js. */
+.modal-flight {
+  position: fixed;
+  z-index: 1003;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  pointer-events: none;
+  transition:
+    top 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    left 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    width 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.3s ease;
+}
+
+.modal-flight img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 1010;
+  width: 100%;
+}
+
+.modal-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.modal-title {
+  font-size: calc(var(--font-size) * 1.5);
+  font-weight: 700;
+  margin: 0;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+.modal-button {
+  background: var(--bg-secondary);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
+  font-size: calc(var(--font-size) * 1.5);
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: all var(--transition-fast);
+  position: relative;
+  z-index: 1020;
+  padding: var(--spacing-xs);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: var(--spacing-md);
+}
+
+.modal-button:hover {
+  background: var(--bg-main);
+  color: var(--text);
+  transform: scale(1.05);
+}
+
+/* Add depression effect on click/active state */
+.modal-button:active {
+  transform: scale(0.95);
+  box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+  border-color: var(--glass-border);
+}
+
+/* Close button hover and active states */
+.modal-close:hover i {
+  color: var(--accent); /* Use accent color on hover */
+  transition: color var(--transition-normal);
+}
+
+.modal-close:active i {
+  color: var(--accent-secondary); /* More vibrant color on click/active */
+}
+
+/* Download button hover and active states */
+.modal-download:hover i {
+  color: var(--accent); /* Use accent color on hover */
+  transition: color var(--transition-normal);
+}
+
+.modal-download:active i {
+  color: var(--accent-secondary); /* More vibrant color on click/active */
+}
+
+/* Expand button hover and active states */
+.modal-expand:hover i {
+  color: var(--accent); /* Use accent color on hover */
+  transition: color var(--transition-fast);
+}
+
+.modal-expand:active i {
+  color: var(--accent-secondary); /* More vibrant color on click/active */
+}
+
+/* Also apply to fullscreen close button that's created dynamically */
+.fullscreen-overlay button:hover i {
+  color: var(--accent); /* Use accent color on hover */
+  transition: color var(--transition-fast);
+}
+
+.fullscreen-overlay button:active i {
+  color: var(--accent-secondary); /* More vibrant color on click/active */
+}
+
+.modal-close {
+  margin-left: var(--spacing-md);
+}
+
+.modal-download {
+  margin-left: auto;
+}
+
+.modal-expand {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  background: var(--bg-secondary);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-md);
+  opacity: 0.8;
+}
+
+.modal-expand:hover {
+  opacity: 1;
+}
+
+.modal-image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  margin-bottom: 0;
+  max-height: 100%;
+}
+
+.modal-title-wrapper {
+  margin-bottom: 0;
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+}
+
+.modal-content {
+  margin-top: var(--spacing-xl);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  flex: 1;
+  height: 100%;
+}
+
+@media (min-width: 768px) {
+  .modal-content {
+    display: flex;
+    flex-direction: row;
+    height: auto;
+  }
+
+  .modal-left-column {
+    width: 45%;
+    margin-right: 5%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal-title-wrapper {
+    width: 100%;
+  }
+
+  .modal-metadata {
+    margin-top: var(--spacing-md); /* Reduced margin */
+    width: 100%;
+  }
+
+  .modal-description {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+.modal-metadata {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  color: var(--text-muted);
+  font-size: calc(var(--font-size) * 0.9);
+  padding: var(--spacing-xs) 0; /* Reduced padding */
+  order: 2;
+  box-sizing: border-box;
+  align-self: flex-start;
+  width: 100%;
+}
+
+.metadata-item {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-xs) var(--spacing-md);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  gap: var(--spacing-xs);
+  transition: all var(--transition-fast);
+}
+
+.metadata-item:hover {
+  background: var(--bg-main);
+  transform: translateY(calc(-1 * var(--spacing-xs)));
+}
+
+.modal-location {
+  max-width: none;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+.modal-description {
+  line-height: var(--line-height);
+  color: var(--text-muted);
+  background: var(--bg-secondary);
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-md);
+  backdrop-filter: var(--bg-blur);
+  -webkit-backdrop-filter: var(--bg-blur);
+  border: 1px solid var(--glass-border);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  box-sizing: border-box; /* Add box-sizing to include padding in width */
+}
+
+/* Make description height match left column */
+@media (min-width: 768px) {
+  .modal-content {
+    flex: 1;
+  }
+}
+
+@media (max-width: 767px) {
+  .modal-container {
+    width: 90%;
+    padding: var(--spacing-lg);
+  }
+
+  .modal-content {
+    flex-direction: column;
+    width: 100%; /* Ensure full width */
+    box-sizing: border-box; /* Include padding in width calculation */
+  }
+
+  .modal-left-column {
+    width: 100%;
+    margin-bottom: var(--spacing-xl);
+    box-sizing: border-box; /* Include padding in width calculation */
+  }
+
+  .modal-description {
+    width: 100%; /* Ensure full width */
+    padding: var(--spacing-md); /* Slightly reduce padding on mobile */
+    box-sizing: border-box; /* Include padding in width calculation */
+  }
+}
+
+@media (max-width: 600px) {
+  .modal-container {
+    width: 95%;
+    padding: var(--spacing-lg);
+  }
+
+  .modal-title {
+    font-size: calc(var(--font-size) * 1.3);
+  }
+}
+
+/* Only the backdrop fades. Fading the overlay itself would fade the photo
+   with it. */
+.fullscreen-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: transparent;
+  z-index: 2000;
+  transition: background-color var(--transition-normal);
+  /* Always dark, whatever the page theme, so accents resolve to their dark
+     variants */
+  color-scheme: dark;
+}
+
+.fullscreen-overlay--active {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* Grows from the modal image to the centre and back, on the .modal-flight
+   curve. The duration is mirrored by FLIGHT_MS in photo-card.js. */
+.fullscreen-image-container {
+  position: absolute;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition:
+    top 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    left 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    width 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fullscreen-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fullscreen-button-bar {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: flex;
+  gap: 10px;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  z-index: 2001;
+}
+
+.fullscreen-button-bar--visible {
+  opacity: 1;
+}
+
+/* Dark disc and white icon, readable over any part of the photo */
+.fullscreen-button {
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.3rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: all var(--transition-fast);
+}
+
+.fullscreen-button:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: scale(1.05);
+}
+
+.fullscreen-button:active {
+  transform: scale(0.95);
+}
+
+.fullscreen-button--close:hover i {
+  color: #e57373;
+}
+
+.fullscreen-button--close:active i {
+  color: #e53935;
+}
+
+.fullscreen-button--download:hover i {
+  color: #64b5f6;
+}
+
+.fullscreen-button--download:active i {
+  color: #2196f3;
+}
+
+/* Dark Mode Modal Styles */
+.dark-theme .photo-modal-overlay {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.dark-theme .modal-button:active {
+  box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Translucent surfaces keep their alpha when colors are forced */
+@media (forced-colors: active) {
+  .polaroid,
+  .modal-container,
+  .metadata-item {
+    border: 1px solid CanvasText;
+  }
+
+  .modal-container {
+    background: Canvas;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .polaroid {
+    transition: none;
+  }
+
+  .photo-modal-overlay,
+  .modal-container,
+  .modal-flight,
+  .modal-button,
+  .fullscreen-overlay,
+  .fullscreen-image-container,
+  .fullscreen-overlay button,
+  .fullscreen-overlay img {
+    transition: none !important;
+    animation: none !important;
+  }
+}

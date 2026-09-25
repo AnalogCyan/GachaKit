@@ -1,0 +1,208 @@
+<!-- Showcase landing page demonstrating the available capsules -->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: blob:; connect-src 'self'; base-uri 'self'; form-action 'self';"
+    />
+    <link rel="icon" type="image/svg+xml" href="/media/logo.svg" />
+    <link rel="apple-touch-icon" href="/media/apple-touch-icon.png" />
+    <title>GachaKit</title>
+
+    <script src="/scripts/theme-init.js"></script>
+
+    <!-- EXTERNAL_RESOURCES -->
+
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/scripts.js" defer></script>
+  </head>
+  <body class="page-shell" data-nav-page="home">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <drop capsule="gradient-background" data-animated="true"></drop>
+    <drop capsule="button-array"></drop>
+    <drop capsule="card-list"></drop>
+
+    <header class="container nav-center">
+      <drop capsule="header">
+        <li class="nav-pill__item">
+          <a href="/" class="nav-pill__link" aria-label="Home" data-nav="home">
+            <i class="ri-home-5-line" aria-hidden="true"></i>
+            <span class="nav-pill__text">Home</span>
+          </a>
+        </li>
+        <li class="nav-pill__item">
+          <a
+            href="#capsules"
+            class="nav-pill__link"
+            aria-label="Capsules"
+            data-nav="capsules"
+          >
+            <i class="ri-capsule-line" aria-hidden="true"></i>
+            <span class="nav-pill__text">Capsules</span>
+          </a>
+        </li>
+        <li class="nav-pill__item">
+          <a
+            href="https://github.com/AnalogCyan/GachaKit#readme"
+            class="nav-pill__link"
+            aria-label="Docs"
+            data-nav="docs"
+          >
+            <i class="ri-book-open-line" aria-hidden="true"></i>
+            <span class="nav-pill__text">Docs</span>
+          </a>
+        </li>
+      </drop>
+    </header>
+
+    <main class="container" id="main">
+      <!-- Hero -->
+      <section class="glass section-card showcase-hero">
+        <h1 class="showcase-title">GachaKit</h1>
+        <p class="showcase-lead">
+          A modular static site generator that dispenses UI Capsules into your
+          layout like little drops of joy. Built on vanilla web standards with a
+          Liquid Glass x Material Expressive aesthetic.
+        </p>
+        <nav class="button-group" aria-label="Get started">
+          <a
+            class="button secondary button-group__item button-group__item--first"
+            href="https://github.com/AnalogCyan/GachaKit"
+          >
+            <i class="ri-github-fill" aria-hidden="true"></i>
+            <span>View Source</span>
+          </a>
+          <a
+            class="button secondary button-group__item button-group__item--last"
+            href="#capsules"
+          >
+            <i class="ri-capsule-line" aria-hidden="true"></i>
+            <span>Explore Capsules</span>
+          </a>
+        </nav>
+      </section>
+
+      <!-- Core concepts as cards -->
+      <section id="capsules">
+        <div class="section-title">
+          <h2>Core Concepts</h2>
+        </div>
+        <div class="card-list">
+          <article class="glass card-list__item">
+            <div class="card-list__header">
+              <h3 class="card-list__title">
+                <i class="ri-capsule-line" aria-hidden="true"></i>
+                Capsules
+              </h3>
+            </div>
+            <p class="card-list__desc">
+              Self-contained components that bundle their own HTML, CSS, and JS.
+              Drop a
+              <code>&lt;drop capsule="..."&gt;</code> tag into any page and the
+              build system expands it, bundles the styles, and wires up the
+              scripts.
+            </p>
+          </article>
+
+          <article class="glass card-list__item">
+            <div class="card-list__header">
+              <h3 class="card-list__title">
+                <i class="ri-drop-line" aria-hidden="true"></i>
+                Drop Syntax
+              </h3>
+            </div>
+            <p class="card-list__desc">
+              Compose layouts with declarative
+              <code>&lt;drop&gt;</code> tags. Capsules can nest other capsules,
+              accept data attributes for configuration, and the whole thing
+              recursively expands at build time.
+            </p>
+          </article>
+
+          <article class="glass card-list__item">
+            <div class="card-list__header">
+              <h3 class="card-list__title">
+                <i class="ri-palette-line" aria-hidden="true"></i>
+                Liquid Glass
+              </h3>
+            </div>
+            <p class="card-list__desc">
+              Frosted transparency, backdrop blur, layered depth, soft light
+              reflections, and bold color accents. Every surface feels physical
+              and tactile without being chaotic.
+            </p>
+          </article>
+
+          <article class="glass card-list__item">
+            <div class="card-list__header">
+              <h3 class="card-list__title">
+                <i class="ri-flashlight-line" aria-hidden="true"></i>
+                Zero Bundler
+              </h3>
+            </div>
+            <p class="card-list__desc">
+              One Node.js script. No webpack, no Vite, no complicated config.
+              The build reads your pages, expands drops, bundles capsule
+              stylesheets, and outputs static HTML ready to deploy anywhere.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Photo cards demo -->
+      <section>
+        <div class="section-title">
+          <h2>Photo Cards</h2>
+        </div>
+        <p>Polaroid-style photo cards with fullscreen modal capabilities.</p>
+        <drop capsule="photo-card" data-count="3"></drop>
+      </section>
+
+      <!-- Button array demo -->
+      <section>
+        <div class="section-title">
+          <h2>Button Arrays</h2>
+        </div>
+        <p>
+          Connected-pill button rows with Material-style radius choreography.
+          Hover one and the siblings gently shrink. Stack vertically on small
+          screens.
+        </p>
+        <nav class="button-group" aria-label="Example actions">
+          <a
+            class="button secondary button-group__item button-group__item--first"
+            href="#"
+          >
+            <i class="ri-star-line" aria-hidden="true"></i>
+            <span>Star</span>
+          </a>
+          <a
+            class="button secondary button-group__item button-group__item--middle"
+            href="#"
+          >
+            <i class="ri-heart-line" aria-hidden="true"></i>
+            <span>Like</span>
+          </a>
+          <a
+            class="button secondary button-group__item button-group__item--last"
+            href="#"
+          >
+            <i class="ri-share-line" aria-hidden="true"></i>
+            <span>Share</span>
+          </a>
+        </nav>
+      </section>
+    </main>
+
+    <drop capsule="footer">
+      <p>
+        &copy; 2024-2026 GachaKit. Built with softness, structure, and a hint of
+        shimmer.
+      </p>
+    </drop>
+  </body>
+</html>

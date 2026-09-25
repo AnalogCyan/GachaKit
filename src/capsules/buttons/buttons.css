@@ -1,0 +1,47 @@
+/* 88x31 button capsule layout */
+
+.buttons-capsule {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  justify-content: center;
+  margin-inline: auto;
+  max-width: calc(7 * 88px + 6 * var(--spacing-sm));
+}
+
+.buttons-capsule :is(a, div) {
+  display: inline-block;
+  position: relative;
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+  transition:
+    translate var(--transition-fast),
+    scale var(--transition-fast),
+    box-shadow var(--transition-fast);
+  line-height: 0;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      var(--glass-highlight),
+      transparent 50%,
+      var(--glass-edge)
+    );
+    pointer-events: none;
+  }
+
+  &:hover {
+    translate: 0 -2px;
+    scale: 1.04;
+    box-shadow: var(--shadow-md);
+  }
+}
+
+.buttons-capsule :is(a, div) img {
+  display: block;
+  width: 88px;
+  height: 31px;
+}
