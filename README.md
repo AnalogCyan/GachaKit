@@ -237,6 +237,8 @@ npx prettier --check .
 
 CI runs those, builds, then packs the package and builds a consumer project from the tarball.
 
+The starter site on Netlify writes `/version.json` with its version and commit (`tools/version.js`, not part of the package). A clean build of main is `0.YYYYMMDD.N`, from the UTC day of the commit and N counting main's commits that day, and a CI workflow tags it `site/v0.YYYYMMDD.N`; anything else is `0.0.0-dev`. The package itself keeps SemVer.
+
 ## License
 
 Code is [GNU AGPL v3](LICENSE), which also covers sites built with GachaKit that are deployed publicly. Sample copy under `src/` is [CC BY-SA 4.0](LICENSE-CONTENT). The sample photos in `src/images/` are NASA photographs in the public domain. Remix Icon (Apache 2.0) and Nunito (SIL OFL 1.1) load from CDNs.
