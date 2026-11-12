@@ -1,8 +1,8 @@
 # Netlify build config: runs build.js, publishes public/
 
 [build]
-# 🔧 Build command for the static site
-command = "node build.js"
+# 🔧 Build command for the static site; version.json reports what is deployed
+command = "node build.js && node tools/version.js public"
 
 # 📦 Output directory for built files
 publish = "public"

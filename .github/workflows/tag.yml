@@ -1,0 +1,47 @@
+name: Tag
+
+# The starter site's version of record is a site/ tag, apart from the
+# package's SemVer tags; the Forgejo mirror pulls it from here.
+# Its own workflow, so CI cancelling a superseded run never skips a tag for
+# a commit Netlify has deployed. Netlify deploys whether or not CI passes,
+# so this does not wait for CI either.
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tag
+  cancel-in-progress: false
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 26
+      - name: Tag the version Netlify deploys this commit as
+        run: |
+          version=$(node tools/version.js)
+          case "$version" in
+            0.0.0-dev*) echo "Not a release build: $version" >&2; exit 1 ;;
+          esac
+          tag="site/v$version"
+          if existing=$(git rev-parse -q --verify "refs/tags/$tag^{commit}"); then
+            if [ "$existing" = "$(git rev-parse HEAD)" ]; then
+              echo "$tag already names this commit"
+              exit 0
+            fi
+            echo "$tag already names $existing, not this commit" >&2
+            exit 1
+          fi
+          git -c user.name="github-actions[bot]" \
+            -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            tag -a "$tag" -m "$tag"
+          git push origin "$tag"
