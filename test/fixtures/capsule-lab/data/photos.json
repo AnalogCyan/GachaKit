@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "title": "Earthrise",
+    "date": "1968-12-24",
+    "location": "Lunar orbit, Apollo 8",
+    "camera": "Hasselblad 500 EL, 250mm",
+    "imageSrc": "earthrise.jpeg",
+    "description": "Earth rising over the lunar horizon, photographed by William Anders on Christmas Eve 1968 as Apollo 8 came around the far side of the Moon. NASA photo AS08-14-2383, public domain."
+  },
+  {
+    "id": 2,
+    "title": "The Blue Marble",
+    "date": "1972-12-07",
+    "location": "En route to the Moon, Apollo 17",
+    "camera": "Hasselblad 500 EL, 80mm",
+    "imageSrc": "blue-marble.jpeg",
+    "description": "The whole Earth lit from behind the spacecraft, with Africa, Antarctica and the Arabian Peninsula in frame. Taken by the Apollo 17 crew about five hours after launch. NASA photo AS17-148-22727, public domain."
+  },
+  {
+    "id": 3,
+    "title": "Moonwalk",
+    "date": "1969-07-20",
+    "location": "Sea of Tranquility, Apollo 11",
+    "camera": "Hasselblad 500 EL, 60mm",
+    "imageSrc": "apollo-11-moonwalk.jpeg",
+    "description": "Buzz Aldrin on the lunar surface, photographed by Neil Armstrong, who is visible in the visor reflection. NASA photo AS11-40-5903, public domain."
+  }
+]

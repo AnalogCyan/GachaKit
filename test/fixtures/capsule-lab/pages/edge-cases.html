@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- EXTERNAL_RESOURCES -->
+    <title>Expansion edge cases</title>
+    <link rel="icon" type="image/svg+xml" href="/media/logo.svg" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/scripts/theme-init.js"></script>
+    <script src="/scripts.js" defer></script>
+  </head>
+  <body class="page-shell" data-nav-page="edge">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <drop capsule="gradient-background" data-animated="true"></drop>
+    <drop capsule="button-array"></drop>
+    <drop capsule="card-list"></drop>
+    <drop capsule="page-header" data-nav-page="edge">
+      <li class="nav-pill__item">
+        <a href="/" class="nav-pill__link" aria-label="Home" data-nav="home">
+          <i class="ri-home-5-line"></i>
+          <span class="nav-pill__text">Home</span>
+        </a>
+      </li>
+      <li class="nav-pill__item">
+        <a
+          href="/layout"
+          class="nav-pill__link"
+          aria-label="Layout"
+          data-nav="layout"
+        >
+          <i class="ri-layout-top-line"></i>
+          <span class="nav-pill__text">Layout</span>
+        </a>
+      </li>
+      <li class="nav-pill__item">
+        <a
+          href="/cards"
+          class="nav-pill__link"
+          aria-label="Cards"
+          data-nav="cards"
+        >
+          <i class="ri-stack-line"></i>
+          <span class="nav-pill__text">Cards</span>
+        </a>
+      </li>
+      <li class="nav-pill__item">
+        <a
+          href="/buttons"
+          class="nav-pill__link"
+          aria-label="Buttons"
+          data-nav="buttons"
+        >
+          <i class="ri-cursor-line"></i>
+          <span class="nav-pill__text">Buttons</span>
+        </a>
+      </li>
+      <li class="nav-pill__item">
+        <a
+          href="/edge-cases"
+          class="nav-pill__link"
+          aria-label="Edge"
+          data-nav="edge"
+        >
+          <i class="ri-bug-line"></i>
+          <span class="nav-pill__text">Edge</span>
+        </a>
+      </li>
+      <li class="nav-pill__item">
+        <a
+          href="/notes/"
+          class="nav-pill__link"
+          aria-label="Notes"
+          data-nav="notes"
+        >
+          <i class="ri-book-2-line"></i>
+          <span class="nav-pill__text">Notes</span>
+        </a>
+      </li>
+    </drop>
+    <main class="container" id="main">
+      <section class="glass section-card">
+        <div class="section-title">
+          <h1 class="page-title">Expansion edge cases</h1>
+        </div>
+        <p>The drop-expansion behaviours that are easy to regress.</p>
+      </section>
+      <section>
+        <div class="section-title"><h2>Self-closing drop</h2></div>
+        <p>
+          The divider below is
+          <code>&lt;drop capsule="button-array" /&gt;</code> written
+          self-closing. If it expanded, this page has button-array styles
+          available.
+        </p>
+        <drop capsule="button-array" />
+        <nav class="button-group" aria-label="From a self-closing drop">
+          <a
+            class="button secondary button-group__item button-group__item--first"
+            href="#"
+            ><span>Self</span></a
+          >
+          <a
+            class="button secondary button-group__item button-group__item--last"
+            href="#"
+            ><span>Closing</span></a
+          >
+        </nav>
+      </section>
+      <section>
+        <div class="section-title"><h2>Empty slot</h2></div>
+        <p>
+          <code>&lt;drop capsule="footer"&gt;&lt;/drop&gt;</code> with no
+          children clears <code>{{slot}}</code> instead of printing it. The
+          empty footer bar below should contain no text.
+        </p>
+        <drop capsule="footer"></drop>
+      </section>
+      <section>
+        <div class="section-title">
+          <h2>Unset placeholder drops its attribute</h2>
+        </div>
+        <p>
+          This photo-card drop sets only <code>data-count</code>.
+          <code>data-path</code> and <code>data-images-path</code> should be
+          absent from the rendered section, not empty strings.
+        </p>
+        <drop capsule="photo-card" data-count="2"></drop>
+      </section>
+      <section>
+        <div class="section-title"><h2>Attribute escaping</h2></div>
+        <p>
+          The gallery above renders titles from JSON. This card's heading
+          contains <code>&lt;</code>, <code>&gt;</code>, <code>&amp;</code>, a
+          double quote and an apostrophe, written directly in the page.
+        </p>
+        <div class="card-list">
+          <article class="glass card-list__item">
+            <h3>Tom &amp; Jerry&rsquo;s &lt;drop&gt; &quot;test&quot;</h3>
+            <p>
+              If you see raw entity codes or a broken tag here, escaping
+              regressed.
+            </p>
+          </article>
+        </div>
+      </section>
+      <section>
+        <div class="section-title">
+          <h2>Drop tags inside protected regions</h2>
+        </div>
+        <p>
+          The block below is inside <code>&lt;pre&gt;&lt;code&gt;</code>. The
+          engine must leave it as literal text rather than expanding it.
+        </p>
+        <pre><code>&lt;drop capsule="footer"&gt;
+  &lt;p&gt;This should still be visible source, not an expanded footer.&lt;/p&gt;
+&lt;/drop&gt;</code></pre>
+        <!-- <drop capsule="footer"></drop> this one is inside an HTML comment -->
+      </section>
+    </main>
+    <drop capsule="footer">
+      <p>Capsule Lab &middot; built from the local GachaKit engine</p>
+    </drop>
+  </body>
+</html>

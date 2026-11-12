@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- EXTERNAL_RESOURCES -->
+    <title>Nested page</title>
+    <link rel="icon" type="image/svg+xml" href="/media/logo.svg" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/scripts/theme-init.js"></script>
+    <script src="/scripts.js" defer></script>
+  </head>
+  <body class="page-shell" data-nav-page="notes">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <drop capsule="gradient-background" data-animated="true"></drop>
+    <drop capsule="button-array"></drop>
+    <drop capsule="card-list"></drop>
+    <header class="container nav-center">
+      <drop capsule="header">
+        <li class="nav-pill__item">
+          <a href="/" class="nav-pill__link" aria-label="Home" data-nav="home">
+            <i class="ri-home-5-line"></i>
+            <span class="nav-pill__text">Home</span>
+          </a>
+        </li>
+        <li class="nav-pill__item">
+          <a
+            href="/layout"
+            class="nav-pill__link"
+            aria-label="Layout"
+            data-nav="layout"
+          >
+            <i class="ri-layout-top-line"></i>
+            <span class="nav-pill__text">Layout</span>
+          </a>
+        </li>
+        <li class="nav-pill__item">
+          <a
+            href="/cards"
+            class="nav-pill__link"
+            aria-label="Cards"
+            data-nav="cards"
+          >
+            <i class="ri-stack-line"></i>
+            <span class="nav-pill__text">Cards</span>
+          </a>
+        </li>
+        <li class="nav-pill__item">
+          <a
+            href="/buttons"
+            class="nav-pill__link"
+            aria-label="Buttons"
+            data-nav="buttons"
+          >
+            <i class="ri-cursor-line"></i>
+            <span class="nav-pill__text">Buttons</span>
+          </a>
+        </li>
+        <li class="nav-pill__item">
+          <a
+            href="/edge-cases"
+            class="nav-pill__link"
+            aria-label="Edge"
+            data-nav="edge"
+          >
+            <i class="ri-bug-line"></i>
+            <span class="nav-pill__text">Edge</span>
+          </a>
+        </li>
+        <li class="nav-pill__item">
+          <a
+            href="/notes/"
+            class="nav-pill__link"
+            aria-label="Notes"
+            data-nav="notes"
+          >
+            <i class="ri-book-2-line"></i>
+            <span class="nav-pill__text">Notes</span>
+          </a>
+        </li>
+      </drop>
+    </header>
+    <main class="container" id="main">
+      <section class="glass section-card">
+        <div class="section-title">
+          <h1 class="page-title">Nested page</h1>
+        </div>
+        <p>Built from src/pages/notes/index.html to a directory URL.</p>
+      </section>
+      <section>
+        <div class="section-title"><h2>Nested page</h2></div>
+        <p>
+          This page lives at <code>src/pages/notes/index.html</code> and builds
+          to <code>/notes/</code>. Check its canonical link in view-source: it
+          should be the directory, not the file.
+        </p>
+        <p>
+          The sitemap at <a href="/sitemap.xml">/sitemap.xml</a> lists every
+          page in the lab.
+        </p>
+      </section>
+    </main>
+    <drop capsule="footer">
+      <p>Capsule Lab &middot; built from the local GachaKit engine</p>
+    </drop>
+  </body>
+</html>
