@@ -1,0 +1,29 @@
+{
+  "fonts": {
+    "primary": {
+      "name": "Nunito",
+      "url": "https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+    }
+  },
+  "externalResources": {
+    "remixIcons": {
+      "url": "https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css",
+      "type": "stylesheet"
+    }
+  },
+  "indieweb": {
+    "relMe": ["https://github.com/AnalogCyan"],
+    "webmention": "https://webmention.io/example/webmention",
+    "feeds": [
+      { "href": "/feed.xml", "type": "application/rss+xml", "title": "RSS" }
+    ]
+  },
+  "meta": {
+    "title": "Capsule Lab",
+    "description": "Every GachaKit capsule, in several configurations at once.",
+    "author": "AnalogCyan",
+    "image": "/media/logo.svg",
+    "siteUrl": "http://127.0.0.1:4700",
+    "cleanUrls": true
+  }
+}

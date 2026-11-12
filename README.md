@@ -237,6 +237,8 @@ npx prettier --check .
 
 CI runs those, builds, then packs the package and builds a consumer project from the tarball.
 
+The capsule lab (`test/fixtures/capsule-lab`) shows every capsule in several configurations, plus the drop edge cases that are easy to regress. `npm run lab` builds it with this repo's capsules and styles into `.capsule-lab/` and serves it on port 4700; the tests build it too and fail on any warning or unexpanded drop.
+
 The starter site on Netlify writes `/version.json` with its version and commit (`tools/version.js`, not part of the package). A clean build of main is `0.YYYYMMDD.N`, from the UTC day of the commit and N counting main's commits that day, and a CI workflow tags it `site/v0.YYYYMMDD.N`; anything else is `0.0.0-dev`. The package itself keeps SemVer.
 
 ## License

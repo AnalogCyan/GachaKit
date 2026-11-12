@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- EXTERNAL_RESOURCES -->
+    <title>Button capsules</title>
+    <link rel="icon" type="image/svg+xml" href="/media/logo.svg" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/scripts/theme-init.js"></script>
+    <script src="/scripts.js" defer></script>
+  </head>
+  <body class="page-shell" data-nav-page="buttons">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <drop capsule="gradient-background" data-animated="true"></drop>
+    <drop capsule="button-array"></drop>
+    <drop capsule="card-list"></drop>
+    <drop capsule="page-header" data-nav-page="buttons">
+      <li class="nav-pill__item">
+        <a href="/" class="nav-pill__link" aria-label="Home" data-nav="home">
+          <i class="ri-home-5-line"></i>
+          <span class="nav-pill__text">Home</span>
+        </a>
+      </li>
+      <li class="nav-pill__item">
+        <a
+          href="/layout"
+          class="nav-pill__link"
+          aria-label="Layout"
+          data-nav="layout"
+        >
+          <i class="ri-layout-top-line"></i>
+          <span class="nav-pill__text">Layout</span>
+        </a>
+      </li>
+      <li class="nav-pill__item">
+        <a
+          href="/cards"
+          class="nav-pill__link"
+          aria-label="Cards"
+          data-nav="cards"
+        >
+          <i class="ri-stack-line"></i>
+          <span class="nav-pill__text">Cards</span>
+        </a>
+      </li>
+      <li class="nav-pill__item">
+        <a
+          href="/buttons"
+          class="nav-pill__link"
+          aria-label="Buttons"
+          data-nav="buttons"
+        >
+          <i class="ri-cursor-line"></i>
+          <span class="nav-pill__text">Buttons</span>
+        </a>
+      </li>
+      <li class="nav-pill__item">
+        <a
+          href="/edge-cases"
+          class="nav-pill__link"
+          aria-label="Edge"
+          data-nav="edge"
+        >
+          <i class="ri-bug-line"></i>
+          <span class="nav-pill__text">Edge</span>
+        </a>
+      </li>
+      <li class="nav-pill__item">
+        <a
+          href="/notes/"
+          class="nav-pill__link"
+          aria-label="Notes"
+          data-nav="notes"
+        >
+          <i class="ri-book-2-line"></i>
+          <span class="nav-pill__text">Notes</span>
+        </a>
+      </li>
+    </drop>
+    <main class="container" id="main">
+      <section class="glass section-card">
+        <div class="section-title">
+          <h1 class="page-title">Button capsules</h1>
+        </div>
+        <p>button-array at several lengths, plus the 88x31 badge wall.</p>
+      </section>
+      <section>
+        <div class="section-title"><h2>button-array, two items</h2></div>
+        <p>First and last only, so both outer radii are rounded.</p>
+        <nav class="button-group" aria-label="Two">
+          <a
+            class="button secondary button-group__item button-group__item--first"
+            href="#"
+            ><i class="ri-star-line" aria-hidden="true"></i><span>Star</span></a
+          >
+          <a
+            class="button secondary button-group__item button-group__item--last"
+            href="#"
+            ><i class="ri-heart-line" aria-hidden="true"></i
+            ><span>Like</span></a
+          >
+        </nav>
+      </section>
+      <section>
+        <div class="section-title"><h2>button-array, three items</h2></div>
+        <p>Hover any one: the siblings shrink toward it.</p>
+        <nav class="button-group" aria-label="Three">
+          <a
+            class="button secondary button-group__item button-group__item--first"
+            href="#"
+            ><i class="ri-star-line" aria-hidden="true"></i><span>Star</span></a
+          >
+          <a
+            class="button secondary button-group__item button-group__item--middle"
+            href="#"
+            ><i class="ri-heart-line" aria-hidden="true"></i
+            ><span>Like</span></a
+          >
+          <a
+            class="button secondary button-group__item button-group__item--last"
+            href="#"
+            ><i class="ri-share-line" aria-hidden="true"></i
+            ><span>Share</span></a
+          >
+        </nav>
+      </section>
+      <section>
+        <div class="section-title">
+          <h2>button-array, five items with long labels</h2>
+        </div>
+        <p>Narrow the window: this is where the row stacks vertically.</p>
+        <nav class="button-group" aria-label="Five">
+          <a
+            class="button secondary button-group__item button-group__item--first"
+            href="#"
+            ><span>Subscribe</span></a
+          >
+          <a
+            class="button secondary button-group__item button-group__item--middle"
+            href="#"
+            ><span>Bookmark</span></a
+          >
+          <a
+            class="button secondary button-group__item button-group__item--middle"
+            href="#"
+            ><span>Syndicate</span></a
+          >
+          <a
+            class="button secondary button-group__item button-group__item--middle"
+            href="#"
+            ><span>Archive</span></a
+          >
+          <a
+            class="button secondary button-group__item button-group__item--last"
+            href="#"
+            ><span>Report</span></a
+          >
+        </nav>
+      </section>
+      <section>
+        <div class="section-title"><h2>buttons capsule, 88x31 badges</h2></div>
+        <p>
+          Slot content is arbitrary; the capsule only provides the wrapping
+          grid.
+        </p>
+        <drop capsule="buttons">
+          <a href="https://example.com"
+            ><img
+              src="/media/logo.svg"
+              width="88"
+              height="31"
+              alt="Lab badge one"
+          /></a>
+          <a href="https://example.com"
+            ><img
+              src="/media/logo.svg"
+              width="88"
+              height="31"
+              alt="Lab badge two"
+          /></a>
+          <a href="https://example.com"
+            ><img
+              src="/media/logo.svg"
+              width="88"
+              height="31"
+              alt="Lab badge three"
+          /></a>
+          <a href="https://example.com"
+            ><img
+              src="/media/logo.svg"
+              width="88"
+              height="31"
+              alt="Lab badge four"
+          /></a>
+        </drop>
+      </section>
+    </main>
+    <drop capsule="footer">
+      <p>Capsule Lab &middot; built from the local GachaKit engine</p>
+    </drop>
+  </body>
+</html>

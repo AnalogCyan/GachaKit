@@ -2,7 +2,7 @@ import js from "@eslint/js";
 import globals from "globals";
 
 export default [
-  { ignores: ["public/**"] },
+  { ignores: ["public/**", ".capsule-lab/**"] },
   js.configs.recommended,
   {
     files: ["**/*.js"],

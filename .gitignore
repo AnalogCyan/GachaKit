@@ -194,3 +194,4 @@ dist
 *.vsix
 
 public/*
+.capsule-lab/

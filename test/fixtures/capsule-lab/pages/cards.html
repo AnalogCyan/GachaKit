@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- EXTERNAL_RESOURCES -->
+    <title>Card capsules</title>
+    <link rel="icon" type="image/svg+xml" href="/media/logo.svg" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/scripts/theme-init.js"></script>
+    <script src="/scripts.js" defer></script>
+  </head>
+  <body class="page-shell" data-nav-page="cards">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <drop capsule="gradient-background" data-animated="true"></drop>
+    <drop capsule="button-array"></drop>
+    <drop capsule="card-list"></drop>
+    <drop capsule="page-header" data-nav-page="cards">
+      <li class="nav-pill__item">
+        <a href="/" class="nav-pill__link" aria-label="Home" data-nav="home">
+          <i class="ri-home-5-line"></i>
+          <span class="nav-pill__text">Home</span>
+        </a>
+      </li>
+      <li class="nav-pill__item">
+        <a
+          href="/layout"
+          class="nav-pill__link"
+          aria-label="Layout"
+          data-nav="layout"
+        >
+          <i class="ri-layout-top-line"></i>
+          <span class="nav-pill__text">Layout</span>
+        </a>
+      </li>
+      <li class="nav-pill__item">
+        <a
+          href="/cards"
+          class="nav-pill__link"
+          aria-label="Cards"
+          data-nav="cards"
+        >
+          <i class="ri-stack-line"></i>
+          <span class="nav-pill__text">Cards</span>
+        </a>
+      </li>
+      <li class="nav-pill__item">
+        <a
+          href="/buttons"
+          class="nav-pill__link"
+          aria-label="Buttons"
+          data-nav="buttons"
+        >
+          <i class="ri-cursor-line"></i>
+          <span class="nav-pill__text">Buttons</span>
+        </a>
+      </li>
+      <li class="nav-pill__item">
+        <a
+          href="/edge-cases"
+          class="nav-pill__link"
+          aria-label="Edge"
+          data-nav="edge"
+        >
+          <i class="ri-bug-line"></i>
+          <span class="nav-pill__text">Edge</span>
+        </a>
+      </li>
+      <li class="nav-pill__item">
+        <a
+          href="/notes/"
+          class="nav-pill__link"
+          aria-label="Notes"
+          data-nav="notes"
+        >
+          <i class="ri-book-2-line"></i>
+          <span class="nav-pill__text">Notes</span>
+        </a>
+      </li>
+    </drop>
+    <main class="container" id="main">
+      <section class="glass section-card">
+        <div class="section-title">
+          <h1 class="page-title">Card capsules</h1>
+        </div>
+        <p>
+          card-list in both variants, and two independent photo-card galleries.
+        </p>
+      </section>
+      <section>
+        <div class="section-title"><h2>card-list, default spacing</h2></div>
+        <p>
+          Hover one card. It lifts and scales; siblings scale down slightly.
+          Nothing reflows.
+        </p>
+        <div class="card-list">
+          <article class="glass card-list__item">
+            <h3>First</h3>
+            <p>Radius choreography rounds the top of the first item.</p>
+          </article>
+          <article class="glass card-list__item">
+            <h3>Middle</h3>
+            <p>Middle items keep the tighter radius.</p>
+          </article>
+          <article class="glass card-list__item">
+            <h3>Last</h3>
+            <p>The last item rounds its bottom corners.</p>
+          </article>
+        </div>
+      </section>
+      <section>
+        <div class="section-title"><h2>card-list--dense</h2></div>
+        <p>
+          Same capsule, <code>--dense</code> modifier: more padding, larger
+          internal gaps.
+        </p>
+        <div class="card-list card-list--dense">
+          <article class="glass card-list__item">
+            <h3>Dense first</h3>
+            <p>Used by the thayn.me blog index for post cards.</p>
+          </article>
+          <article class="glass card-list__item">
+            <h3>Dense last</h3>
+            <p>Hover behaviour matches the default variant.</p>
+          </article>
+        </div>
+      </section>
+      <section>
+        <div class="section-title"><h2>photo-card, default gallery</h2></div>
+        <p>
+          <code>&lt;drop capsule="photo-card" data-count="3"&gt;</code> reading
+          <code>data/photos.json</code>. Click a card: the modal is labelled by
+          the photo title, traps focus, and Escape returns focus to the card.
+        </p>
+        <drop capsule="photo-card" data-count="3"></drop>
+      </section>
+      <section>
+        <div class="section-title">
+          <h2>photo-card, second gallery on the same page</h2>
+        </div>
+        <p>
+          A second drop with <code>data-path="/data/portraits.json"</code> and
+          <code>data-count="1"</code>. It must show exactly one card from a
+          different file, proving the two galleries do not share state.
+        </p>
+        <drop
+          capsule="photo-card"
+          data-count="1"
+          data-path="/data/portraits.json"
+        ></drop>
+      </section>
+    </main>
+    <drop capsule="footer">
+      <p>Capsule Lab &middot; built from the local GachaKit engine</p>
+    </drop>
+  </body>
+</html>

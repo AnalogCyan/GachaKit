@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "title": "Second Gallery",
+    "date": "2025-04-02",
+    "location": "Loaded from data/portraits.json",
+    "camera": "data-path override",
+    "imageSrc": "apollo-11-moonwalk.jpeg",
+    "description": "This gallery proves a second photo-card drop on the same page reads its own data-path and data-count rather than sharing the first one's."
+  },
+  {
+    "id": 2,
+    "title": "Capped by data-count",
+    "date": "2025-04-03",
+    "location": "Only one card should render",
+    "camera": "data-count=\"1\"",
+    "imageSrc": "blue-marble.jpeg",
+    "description": "If you can see this card, data-count is not being honoured."
+  }
+]
